@@ -319,22 +319,7 @@
   
 </audio>
 
-<script>
-  const audio = document.getElementById("bg-music");
 
-  // lanjutkan dari posisi terakhir
-  const lastTime = localStorage.getItem("musicTime");
-  if (lastTime) {
-    audio.currentTime = parseFloat(lastTime);
-  }
-
-  audio.play();
-
-  // simpan waktu terakhir sebelum pindah halaman
-  setInterval(() => {
-    localStorage.setItem("musicTime", audio.currentTime);
-  }, 1000);
-</script>
 
 
 
