@@ -316,7 +316,33 @@
 
   <!-- Title -->
   <h1 class="title"><span id="title"></span></h1>
+  <iframe src="music.html" id="music-frame" allow="autoplay" style="display:none"></iframe>
+
+  <audio id="bg-music" autoplay loop>
+  <source src="images/Audio/wave to earth - love. (lyrics).mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const audio = document.getElementById("bg-music");
+
+  // lanjutkan dari posisi terakhir
+  const lastTime = localStorage.getItem("musicTime");
+  if (lastTime) {
+    audio.currentTime = parseFloat(lastTime);
+  }
+
+  audio.play();
+
+  // simpan waktu terakhir sebelum pindah halaman
+  setInterval(() => {
+    localStorage.setItem("musicTime", audio.currentTime);
+  }, 1000);
+</script>
+
+
+
 </body>
+
 
 </html>
 

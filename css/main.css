@@ -1,0 +1,150 @@
+/* Background interaktif */
+body {
+  background: linear-gradient(180deg, #0a0a0a, #1a001a, #000033);
+  min-height: 100vh;
+  color: white;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Efek bintang kecil */
+body::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(white, transparent) 1px 1px;
+  background-size: 50px 50px;
+  animation: stars 60s linear infinite;
+  opacity: 0.3;
+}
+@keyframes stars {
+  from { transform: translateY(0); }
+  to { transform: translateY(-200px); }
+}
+
+/* Heading */
+.heading {
+  margin-top: 2rem;
+  font-size: 2.5rem;
+  text-shadow: 0 0 20px #fff, 0 0 40px #ff69b4;
+  animation: fadeIn 2s ease forwards;
+}
+
+/* Foto Grid */
+.gallery {
+  margin: 2rem auto;
+}
+.gallery .row {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+.gallery .row.center {
+  justify-content: center;
+}
+.gallery img {
+  width: 200px;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+}
+.gallery img:hover {
+  transform: scale(1.08);
+}
+
+/* Outline utk Foto 1-3 */
+.outlined {
+  border: 3px solid #ff66cc;
+  box-shadow: 0 0 15px #ff66cc;
+}
+
+/* Glow utk Foto 4 */
+.glow {
+  box-shadow: 0 0 30px #66ccff, 0 0 50px #3399ff;
+}
+
+/* Fade-in class */
+.fade {
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+}
+.fade:nth-child(1) { animation-delay: 0.5s; }
+.fade:nth-child(2) { animation-delay: 1s; }
+.fade:nth-child(3) { animation-delay: 1.5s; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Surat */
+.letter {
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  background: #222;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255,0,255,0.7);
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+.letter.open {
+  transform: rotate(-20deg) scale(0.5);
+  opacity: 0;
+}
+
+/* Note keluar */
+.note {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: #111;
+  border-radius: 12px;
+  display: inline-block;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.note.glow {
+  opacity: 1;
+  transform: scale(1);
+  animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+  from { box-shadow: 0 0 10px #ff77ff; }
+  to { box-shadow: 0 0 30px #ffccff; }
+}
+.note.hidden { display: none; }
+
+/* Buttons */
+.buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  position: relative;
+}
+button {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+#yesBtn {
+  background: #00cc66;
+  color: white;
+}
+#noBtn {
+  background: #cc0033;
+  color: white;
+  position: relative;
+}
+button:hover {
+  transform: scale(1.1);
+}

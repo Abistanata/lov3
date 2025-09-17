@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Can I be yours?</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, #311b92, #000);
+      font-family: 'Courier New', Courier, monospace;
+      overflow: hidden; /* biar tombol No ga bikin scrollbar */
+    }
+
+    .container {
+      background-color: #121212;
+      border-radius: 20px;
+      padding: 40px 30px;
+      width: 320px;
+      box-shadow: 0 0 20px #6200ea66, inset 0 0 40px #6200ea99;
+      text-align: center;
+      color: #ead1dc;
+      user-select: none;
+      z-index: 5;
+    }
+
+    .prompt {
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: #f3e5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .heart {
+      color: #ff1744;
+      font-size: 22px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      position: relative;
+    }
+
+    button {
+      border: none;
+      border-radius: 100px;
+      padding: 12px 40px;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .btn-no {
+      background: #d50000;
+      box-shadow: 0 0 15px #ff1744;
+      position: absolute; /* biar bebas lari ke seluruh layar */
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+    .btn-no:hover {
+      background: #ff1744;
+      box-shadow: 0 0 25px #ff1744, 0 0 20px #ff1744 inset;
+    }
+
+    .btn-yes {
+      background: #00c853;
+      box-shadow: 0 0 15px #00e676;
+      position: relative;
+      z-index: 5;
+    }
+    .btn-yes:hover {
+      background: #00e676;
+      box-shadow: 0 0 25px #00e676, 0 0 20px #00e676 inset;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="prompt">
+      Can I be yours? <span class="heart">❤️</span>
+    </div>
+    <div class="buttons">
+      <button class="btn-no" id="noBtn">No</button>
+      <button class="btn-yes" id="yesBtn">Yes</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+
+    // Tombol No kabur ke seluruh layar
+    noBtn.addEventListener("mouseenter", () => {
+      const screenW = window.innerWidth;
+      const screenH = window.innerHeight;
+      const btnW = noBtn.offsetWidth;
+      const btnH = noBtn.offsetHeight;
+
+      const randX = Math.random() * (screenW - btnW);
+      const randY = Math.random() * (screenH - btnH);
+
+      noBtn.style.transition = "all 0.2s ease";
+      noBtn.style.left = randX + "px";
+      noBtn.style.top = randY + "px";
+    });
+
+    // Klik Yes redirect
+    yesBtn.addEventListener("click", () => {
+      window.location.href = "flower.html";
+    });
+  </script>
+  <iframe src="music.html" id="music-frame" allow="autoplay" style="display:none"></iframe>
+  <audio id="bg-music" autoplay loop>
+  <source src="images/Audio/wave to earth - love. (lyrics).mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const audio = document.getElementById("bg-music");
+
+  // lanjutkan dari posisi terakhir
+  const lastTime = localStorage.getItem("musicTime");
+  if (lastTime) {
+    audio.currentTime = parseFloat(lastTime);
+  }
+
+  audio.play();
+
+  // simpan waktu terakhir sebelum pindah halaman
+  setInterval(() => {
+    localStorage.setItem("musicTime", audio.currentTime);
+  }, 1000);
+</script>
+
+
+
+</body>
+</html>

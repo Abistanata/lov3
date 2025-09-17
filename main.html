@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Main Page</title>
+  <style>
+    /* Reset */
+    *,
+    *::after,
+    *::before {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --dark-color: #000;
+      --pink-glow: #ff66cc;
+      --blue-glow: #3399ff;
+      --heart-color: #ff69b4;
+      --flower-color: #ff77ff;
+    }
+
+    /* Background interaktif */
+    body {
+      background: linear-gradient(180deg, #0a0a0a, #1a001a, #000033);
+      min-height: 100vh;
+      color: white;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+      padding: 2rem 2rem 5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+
+    /* Efek bintang kecil */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(white, transparent) 1px 1px;
+      background-size: 50px 50px;
+      animation: stars 60s linear infinite;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes stars {
+      from { transform: translateY(0); }
+      to { transform: translateY(-200px); }
+    }
+
+    /* Heading */
+    .heading {
+      margin-top: 2rem;
+      font-size: 3rem;
+      text-shadow:
+        0 0 10px #fff,
+        0 0 20px #ff69b4,
+        0 0 30px #ff69b4,
+        0 0 40px #ff69b4;
+      animation: fadeIn 2s ease forwards;
+      z-index: 10;
+      position: relative;
+    }
+
+    /* Romantic floating hearts */
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: var(--heart-color);
+      clip-path: polygon(
+        50% 0%,
+        61% 10%,
+        70% 20%,
+        80% 35%,
+        80% 50%,
+        80% 65%,
+        70% 80%,
+        60% 90%,
+        50% 100%,
+        40% 90%,
+        30% 80%,
+        20% 65%,
+        20% 50%,
+        20% 35%,
+        30% 20%,
+        39% 10%
+      );
+      opacity: 0.7;
+      animation: floatUp 8s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(1) rotate(0deg);
+        opacity: 0.7;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Generate multiple hearts with different delays and positions */
+    .heart:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 9s; }
+    .heart:nth-child(2) { left: 25%; animation-delay: 2s; animation-duration: 8s; }
+    .heart:nth-child(3) { left: 40%; animation-delay: 4s; animation-duration: 10s; }
+    .heart:nth-child(4) { left: 55%; animation-delay: 1s; animation-duration: 7s; }
+    .heart:nth-child(5) { left: 70%; animation-delay: 3s; animation-duration: 9s; }
+    .heart:nth-child(6) { left: 85%; animation-delay: 5s; animation-duration: 8s; }
+    .heart:nth-child(7) { left: 15%; animation-delay: 6s; animation-duration: 11s; }
+    .heart:nth-child(8) { left: 80%; animation-delay: 7s; animation-duration: 10s; }
+
+    /* Gallery potrait with more spacing */
+
+    
+    .gallery {
+  margin: 3rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem; /* Tingkatkan gap dari 3.5rem menjadi 5rem */
+  z-index: 10;
+  max-width: 350px;
+  width: 100%;
+}
+
+/* Foto potrait: satu foto per baris */
+.gallery img {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 18px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+  cursor: pointer;
+  display: block;
+  margin: 1.5rem auto; /* Tambahkan margin atas dan bawah untuk jarak antar gambar */
+  object-fit: cover;
+  height: 380px; /* Turunkan tinggi dari 420px agar terlihat lebih longgar */
+  box-shadow: 0 0 15px rgba(255, 102, 204, 0.4); /* Sedikit reduksi shadow */
+  border: 3px solid var(--pink-glow); /* Kurangi border dari 4px ke 3px agar terkesan lebih ringan */
+}
+    .gallery img:hover {
+      transform: scale(1.07);
+      box-shadow:
+        0 0 30px var(--pink-glow),
+        0 0 60px var(--pink-glow);
+      border-color: #ff99dd;
+    }
+
+    /* Glow utk Foto 4 */
+    .glow {
+      border-radius: 22px;
+      box-shadow:
+        0 0 40px #66ccff,
+        0 0 70px #3399ff,
+        0 0 90px #66ccff;
+      transition: transform 0.3s ease;
+      height: 440px;
+      border: none;
+    }
+    .glow:hover {
+      transform: scale(1.07);
+      box-shadow:
+        0 0 50px #99ddff,
+        0 0 90px #66ccff,
+        0 0 110px #99ddff;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Surat */
+    .letter-section {
+      margin-top: 5rem;
+      z-index: 10;
+      position: relative;
+      user-select: none;
+    }
+
+    .letter {
+      margin: 0 auto;
+      padding: 1.2rem 3.5rem;
+      font-size: 1.7rem;
+      background: #222;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow:
+        0 0 25px rgba(255, 0, 255, 0.8),
+        0 0 50px rgba(255, 0, 255, 0.6);
+      transition: transform 1s ease, opacity 1s ease;
+      width: max-content;
+      position: relative;
+      z-index: 10;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .letter.open {
+      animation: letterClose 1s forwards;
+    }
+    @keyframes letterClose {
+      0% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: rotate(-25deg) scale(0.6);
+        opacity: 0.5;
+      }
+      100% {
+        transform: rotate(-25deg) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Note keluar */
+    .note {
+      margin-top: 2.5rem;
+      padding: 2.5rem 3.5rem;
+      background: #111;
+      border-radius: 20px;
+      display: inline-block;
+      box-shadow:
+        0 0 30px rgba(255, 255, 255, 0.7),
+        0 0 50px #ff77ff;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+      color: #ffccff;
+      font-size: 1.4rem;
+      font-weight: 700;
+      max-width: 360px;
+      text-align: center;
+      user-select: none;
+      position: relative;
+      z-index: 10;
+    }
+    .note.glow {
+      opacity: 1;
+      transform: scale(1);
+      animation: glow 2.5s infinite alternate;
+    }
+    @keyframes glow {
+      from { box-shadow: 0 0 15px #ff77ff; }
+      to { box-shadow: 0 0 40px #ffccff; }
+    }
+    .note.hidden {
+      display: none;
+    }
+
+    /* Buttons */
+    .buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      position: relative;
+    }
+    button {
+      padding: 0.7rem 2.5rem;
+      border: none;
+      border-radius: 14px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+      font-weight: 700;
+      user-select: none;
+      box-shadow: 0 0 15px rgba(255,255,255,0.4);
+      position: relative;
+      z-index: 10;
+    }
+    #yesBtn {
+      background: #00cc66;
+      color: white;
+      box-shadow:
+        0 0 20px #00cc66,
+        0 0 40px #00cc66;
+    }
+    #yesBtn:hover {
+      background: #00ff88;
+      transform: scale(1.15);
+      box-shadow:
+        0 0 30px #00ff88,
+        0 0 60px #00ff88;
+    }
+    #noBtn {
+      background: #cc0033;
+      color: white;
+      box-shadow:
+        0 0 20px #cc0033,
+        0 0 40px #cc0033;
+      position: absolute;
+      top: 0;
+      left: 0;
+      will-change: transform;
+    }
+    #noBtn:hover {
+      background: #ff3366;
+      transform: scale(1.15);
+      box-shadow:
+        0 0 30px #ff3366,
+        0 0 60px #ff3366;
+    }
+
+    /* Responsive */
+    @media (max-width: 400px) {
+      .gallery img {
+        height: 320px;
+      }
+      .note {
+        max-width: 90vw;
+        font-size: 1.2rem;
+      }
+      .letter {
+        font-size: 1.4rem;
+        padding: 1rem 2.5rem;
+      }
+      .buttons {
+        gap: 1rem;
+      }
+      button {
+        font-size: 1rem;
+        padding: 0.5rem 1.8rem;
+      }
+    }
+    
+
+    /* ===========================
+       Revisi untuk section ayat & foto
+    =============================*/
+   .ayat-section {
+  margin-top: 5rem; /* tambah margin atas agar jarak dari section lain lebih besar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem; /* tambah padding agar ruang dalam section tidak sempit */
+}
+.ayat-container {
+  max-width: 350px;
+  margin: auto;
+  text-align: center;
+  line-height: 1.8em; /* sesuaikan line-height untuk jarak antar baris lebih longgar */
+  font-family: monospace; /* tetap monospace */
+  font-size: 17px; /* sedikit lebih besar untuk keterbacaan */
+  color: #f8f0ff;
+  letter-spacing: 0.06em; /* jarak antar huruf sedikit lebih longgar */
+}
+.ayat-container p {
+  margin: 12px 0; /* jarak antar paragraf diperbesar */
+}
+
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1.8fr 300px 1.8fr; /* memperlebar kolom kiri dan kanan */
+      grid-template-rows: auto auto auto;
+      gap: 2rem 2.5rem; /* jarak antar grid diperbesar sedikit */
+      align-items: center;
+      justify-items: center;
+      position: relative;
+      max-width: 980px; /* batasi lebar grid */
+      width: 100%;
+    }
+
+    .foto img {
+      width: 250px;
+      height: 330px;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 0 35px rgba(255, 102, 204, 0.85);
+      border: 5px solid #ff66cc;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      filter: drop-shadow(0 0 8px #ff66cc);
+      background: #330022;
+    }
+    .foto img:hover {
+      transform: scale(1.1);
+      box-shadow:
+        0 0 60px #ff99dd,
+        0 0 90px #ff66cc,
+        0 0 120px #ff99dd;
+      border-color: #ff99dd;
+      filter: drop-shadow(0 0 12px #ff99dd);
+      background: #440033;
+    }
+
+    .foto1 { grid-column: 2; grid-row: 1; }
+    .foto2 { grid-column: 3; grid-row: 2; }
+    .foto3 { grid-column: 1; grid-row: 2; }
+    .foto4 { grid-column: 2; grid-row: 3; }
+
+    .ayat {
+      grid-column: 2;
+      grid-row: 2;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      max-width: 320px;
+      line-height: 1.5;
+      color: #ffccff;
+      text-shadow: 0 0 15px #ff66cc, 0 0 30px #ff99dd;
+      padding: 0 1rem;
+      user-select: text;
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating hearts -->
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+
+  <!-- Heading -->
+  <h1 class="heading">Ruth Tiara Sinaga</h1>
+
+  <!-- Ayat dengan foto mengelilingi -->
+  <section class="ayat-section">
+    <div class="grid-container">
+      <div class="foto foto1"><img src="images/1.png" alt="Foto 1"></div>
+      <div class="foto foto2"><img src="images/2.png" alt="Foto 2"></div>
+      <div class="foto foto3"><img src="images/3.png" alt="Foto 3"></div>
+      <div class="foto foto4"><img src="images/4.jpg" alt="Foto 4"></div>
+      <div class="ayat">
+        <p>Kidung Agung 1:2-3: 
+  "Kiranya ia mencium aku dengan kecupan! Karena cintamu lebih nikmat dari pada anggur, harum bau minyakmu, bagaikan minyak yang tercurah namamu, oleh sebab itu gadis-gadis cinta kepadamu!" 
+  </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Surat -->
+  <section class="letter-section" aria-label="Love letter section">
+    <div 
+      class="letter" 
+      id="letter" 
+      role="button" 
+      tabindex="0" 
+      aria-pressed="false" 
+      aria-label="Klik surat untuk membuka"
+    >
+      💌
+    </div>
+  </section>
+
+  <script>
+    const letter = document.getElementById("letter");
+
+    letter.addEventListener("click", () => {
+      window.location.href = "purpose.html";
+    });
+
+    // supaya bisa diakses dengan keyboard (Enter / Space)
+    letter.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        window.location.href = "purpose.html";
+      }
+    });
+  </script>
+  <iframe src="music.html" id="music-frame" allow="autoplay" style="display:none"></iframe>
+  <audio id="bg-music" autoplay loop>
+  <source src="images/Audio/wave to earth - love. (lyrics).mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const audio = document.getElementById("bg-music");
+
+  // lanjutkan dari posisi terakhir
+  const lastTime = localStorage.getItem("musicTime");
+  if (lastTime) {
+    audio.currentTime = parseFloat(lastTime);
+  }
+
+  audio.play();
+
+  // simpan waktu terakhir sebelum pindah halaman
+  setInterval(() => {
+    localStorage.setItem("musicTime", audio.currentTime);
+  }, 1000);
+</script>
+
+
+
+</body>
+</html>

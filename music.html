@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Background Music</title>
+</head>
+<body>
+  <audio id="bg-music" loop>
+    <source src="images/Audio/wave to earth - love. (lyrics).mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio tag.
+  </audio>
+
+  <script>
+    const music = document.getElementById("bg-music");
+
+    // coba play otomatis (akan gagal kalau belum ada interaksi user)
+    music.play().catch(() => {
+      console.log("Autoplay diblokir browser, perlu klik user dulu.");
+    });
+
+    // biar tetap bisa dipause/play dari halaman luar pakai iframe
+    window.addEventListener("message", (e) => {
+      if (e.data === "play-music") music.play();
+      if (e.data === "pause-music") music.pause();
+    });
+  </script>
+</body>
+</html>
